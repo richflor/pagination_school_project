@@ -1,4 +1,5 @@
-const domain = "http://localhost:8000"
+const domain = "https://" + window.location.hostname
+console.log(domain)
 
 const btn = document.getElementById("btn");
 const nbr_lines_elem = document.getElementById("nbr_lines")

@@ -30,10 +30,10 @@ app.all(`${uri}/*`, (req, res, next)=> {
 // console.log(QUERY.BASE);
 
 app.use(express.json());
-app.use(express.static('./front'))
+app.use(express.static('public'))
 
 app.get('/', (req, res, next)=> {
-    res.sendFile("../front/index.html");
+    res.sendFile("../public/index.html");
 })
 
 app.get(`${uri}*`, (req, res, next)=> {
