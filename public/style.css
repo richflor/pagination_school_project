@@ -1,0 +1,39 @@
+body {
+    display: flex;
+    justify-content: space-around;
+    padding: 20vh;
+    background-color: #F5F5F5;
+}
+
+.params {
+    width: 25vw;
+}
+
+input {
+    width: 30px;
+}
+
+#main_container {
+    width: 60vw;
+}
+
+#results {
+    padding: 0;
+}
+
+li {
+    list-style: none;
+}
+
+.row {
+    display: flex;
+    border: 2px solid rgb(81, 142, 216);
+    width: 100%;
+}
+
+.cell {
+    text-align: center;
+    width: 20%;
+    border: 1px solid rgb(81, 142, 216);
+    background-color: #EAEEED;
+}

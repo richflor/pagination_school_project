@@ -4,36 +4,52 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Pagination</title>
+    <link rel="stylesheet" href="./reset.css">
+    <link rel="stylesheet" href="./style.css">
 </head>
 <body>
-    <div>
-        <p>Nombre de résultats trouvés</p>
-        <p id="nbr_lines"></p>
+    <div class="params">
+        <div>
+            <p>Nombre de résultats trouvés</p>
+            <p id="nbr_lines"></p>
+        </div>
+        <div>
+            <p>Trier par</p>
+            <select name="type" id="type">
+                <option value="nombre_emprunts">nombre d'emprunts</option>
+                <option value="genre">genre</option>
+                <option value="nom">nom</option>
+            </select>
+            <p>Ordre</p>
+            <select name="order" id="order">
+                <option value="asc">croissant</option>
+                <option value="desc">décroissant</option>
+            </select>
+            <p>Nombre de résultats à afficher</p>
+            <input type="text" id="limit">
+            <p>Numéro de page</p>
+            <input type="text" id="page">
+        </div>
+        <br>
+            <p id="error_message"></p>
+        <br>
+        <button id="btn">
+            Faire la requête
+        </button>        
     </div>
-    <div>
-        <p>Trier par</p>
-        <select name="type" id="type">
-            <option value="nombre_emprunts">nombre d'emprunts</option>
-            <option value="genre">genre</option>
-            <option value="nom">nom</option>
-        </select>
-        <p>Ordre</p>
-        <select name="order" id="order">
-            <option value="asc">croissant</option>
-            <option value="desc">décroissant</option>
-        </select>
-        <p>Nombre de résultats à afficher</p>
-        <input type="text" id="limit">
-        <p>Numéro de page</p>
-        <input type="text" id="page">
+
+    <div id="main_container">
+        <div class="row">
+            <p class="cell">Titre</p>
+            <p class="cell">Coût d'emprunt</p>
+            <p class="cell">Classification</p>
+            <p class="cell">Genre</p>
+            <p class="cell">Nombre d'emprunts</p>
+        </div>
+        <ul id="results">
+        </ul>
     </div>
-    <br>
-        <p id="error_message"></p>
-    <br>
-    <button id="btn">
-        Faire la requête
-    </button>
 </body>
 <script src="./script.js" type="module"></script>
 </html>

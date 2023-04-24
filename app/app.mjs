@@ -27,7 +27,7 @@ app.all(`${uri}/*`, (req, res, next)=> {
     next();
 })
 
-// console.log(QUERY.BASE);
+// console.log(QUERY.BASE)n;
 
 app.use(express.json());
 app.use(express.static('public'))
@@ -36,7 +36,7 @@ app.get('/', (req, res, next)=> {
     res.sendFile("../public/index.html");
 })
 
-app.get(`${uri}*`, (req, res, next)=> {
+app.get(`${uri}*`, (req, res)=> {
     console.log(req.query);
     if(req.query.nbr_lines) {
         connection.query(QUERY.NBR_LINES, function (error, results, fields) {
@@ -46,27 +46,32 @@ app.get(`${uri}*`, (req, res, next)=> {
             } else {
                 req.body = results;
                 res.status(200).json(req.body);
-                // console.log(results);
             }
         });
-    } else if(!QUERY.checkParams(req.query)) {
+        return;
+    }
+
+    if(!QUERY.checkParams(req.query)) {
         console.log("error 1")
         res.status(404).send("Invalid parameters, only those are allowed : type, limit, page, order");
-    } else if(!QUERY.checkValues(req.query)) {
+        return
+    }
+    
+    if(!QUERY.checkValues(req.query)) {
         console.log("error 2")
         res.status(404).send("Invalid parameter values");
-    } else {
-        connection.query(QUERY.BASE(req.query), function (error, results, fields) {
-            if (error) {
-                res.status(500).send("Internal Server Error");
-                console.log(error); 
-            } else {
-                req.body = results;
-                res.status(200).json(req.body);
-                // console.log(results);
-            }
-        });
+        return
     }
+
+    connection.query(QUERY.BASE(req.query), function (error, results, fields) {
+        if (error) {
+            res.status(500).send("Internal Server Error");
+            console.log(error); 
+        } else {
+            req.body = results;
+            res.status(200).json(req.body);
+        }
+    });
 })
 
 app.listen(port, ()=> console.log(`API running on port:${port}`));
