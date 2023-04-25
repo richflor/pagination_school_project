@@ -12,21 +12,24 @@ const limit_elem = document.getElementById("limit");
 const page_elem = document.getElementById("page");
 const order_elem = document.getElementById("order");
 const results_container = document.getElementById("results");
+const left_arrows = document.querySelectorAll(".left");
+const right_arrows = document.querySelectorAll(".right");
+const columns = document.querySelectorAll(".col");
 
-btn.addEventListener("click", ()=> {
+const query = ()=> {
     error_message.textContent = "";
 
     const params = {
-        type: type_elem.value,
+        type:type_elem.value,
         page:page_elem.value,
         order:order_elem.value,
         limit:limit_elem.value
     }
 
-    const query = buildQuery(params);
+    const request = buildQuery(params);
     console.log(query)
 
-    fetch(query, {
+    fetch(request, {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json;charset=utf-8',
@@ -37,13 +40,15 @@ btn.addEventListener("click", ()=> {
     .then((res) => {
         console.log(res);
         displayResults(res, results_container);
-        // window.open(query, '_blank');
+        // window.open(request, '_blank');
     })
     .catch((error) => {
         console.log(error);
-        // window.open(query, '_blank');
+        // window.open(request, '_blank');
     })
-})
+}
+
+btn.addEventListener("click", query)
 
 function displayResults(results, container) {
     container.innerHTML = "";
@@ -71,7 +76,39 @@ function buildQuery({type , order, limit, page}) {
     return query;
 }
 
-//functions invoked on init 
+left_arrows.forEach((left) => {
+    left.addEventListener("click", ()=> {
+        const input = left.nextElementSibling;
+        const value = Number(input.value);
+        if(value > 1) input.value = value - 1;
+        query();
+    })
+})
+
+right_arrows.forEach((right) => {
+    right.addEventListener("click", ()=> {
+        const input = right.previousElementSibling;
+        const value = Number(input.value);
+        input.value = value + 1;
+        query();
+    })
+}) 
+
+columns.forEach((col) => {
+    col.addEventListener("click", ()=> {
+        if (col.dataset.order === "desc") {
+            col.dataset.order = "asc";
+        } else {
+            col.dataset.order = "desc";
+        }
+        type_elem.value = col.dataset.value;
+        order_elem.value = col.dataset.order;
+        query();
+        // col.classList.toggle("col_clicked");;
+    })
+})
+
+//functions called on init 
 
 const nbr_lines = (async ()=> {
     fetch(`${domain}/api?nbr_lines=true`, {

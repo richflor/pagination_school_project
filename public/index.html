@@ -11,15 +11,11 @@
 <body>
     <div class="params">
         <div>
-            <p>Nombre de résultats trouvés</p>
-            <p id="nbr_lines"></p>
-        </div>
-        <div>
             <p>Trier par</p>
             <select name="type" id="type">
                 <option value="nombre_emprunts">nombre d'emprunts</option>
                 <option value="genre">genre</option>
-                <option value="nom">nom</option>
+                <option value="nom">titre</option>
             </select>
             <p>Ordre</p>
             <select name="order" id="order">
@@ -27,29 +23,60 @@
                 <option value="desc">décroissant</option>
             </select>
             <p>Nombre de résultats à afficher</p>
-            <input type="text" id="limit">
+            <!-- <input type="text" id="limit"> -->
             <p>Numéro de page</p>
-            <input type="text" id="page">
+            <!-- <input type="text" id="page"> -->
         </div>
         <br>
             <p id="error_message"></p>
         <br>
-        <button id="btn">
-            Faire la requête
-        </button>        
+      
     </div>
 
     <div id="main_container">
+        <div>
+            <p>Nombre de résultats trouvés</p>
+            <p id="nbr_lines"></p>
+        </div>
+        <div class="arrow_box">
+            <p>Nombre de résultats à afficher</p>
+            <div class="arrows">
+                <div class="left">
+                    &#9668;
+                </div>
+                <input type="number" min="1" value="1" id="limit">
+                <div class="right">
+                    &#9658;
+                </div>
+            </div>
+            
+        </div>
         <div class="row">
-            <p class="cell">Titre</p>
+            <p class="cell col" data-order="desc" data-value="nom">Titre</p>
             <p class="cell">Coût d'emprunt</p>
             <p class="cell">Classification</p>
-            <p class="cell">Genre</p>
-            <p class="cell">Nombre d'emprunts</p>
+            <p class="cell col" data-order="desc" data-value="genre">Genre</p>
+            <p class="cell col" data-order="desc" data-value="nombre_emprunts">Nombre d'emprunts</p>
         </div>
         <ul id="results">
         </ul>
+        <div class="arrow_box">
+            <p>Numéro de page</p>
+            <div class="arrows">
+                <div class="left">
+                    &#9668;
+                </div>
+                <input type="number" min="1" max="20" value="10" id="page">
+                <div class="right">
+                    &#9658;
+                </div>
+            </div>
+        </div>
+        <button id="btn">
+            Faire la requête
+        </button>  
     </div>
+
 </body>
 <script src="./script.js" type="module"></script>
 </html>

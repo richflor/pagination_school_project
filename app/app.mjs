@@ -9,7 +9,6 @@ const ENV = process.env;
 const app = express();
 const port = 8000;
 const uri = "/api";
-const hour = 36*Math.pow(10, 5)
 
 app.use(cors());
 
@@ -46,7 +45,7 @@ app.get(`${uri}*`, (req, res)=> {
                 res.status(500).send("Internal Server Error");
                 console.log(error); 
                 console.log("bang1")
-                throw error;
+                // throw error;
             } else {
                 req.body = results;
                 res.status(200).json(req.body);
@@ -72,7 +71,7 @@ app.get(`${uri}*`, (req, res)=> {
             res.status(500).send("Internal Server Error");
             console.log(error);
             console.log("bang2")
-            throw error
+            // throw error
         } else {
             req.body = results;
             res.status(200).json(req.body);
