@@ -21,7 +21,7 @@ const query = ()=> {
 
     const params = {
         type:type_elem.value,
-        page:page_elem.value,
+        page:page_elem.value - 1,
         order:order_elem.value,
         limit:limit_elem.value
     }
@@ -123,7 +123,7 @@ const nbr_lines = (async ()=> {
         nbr_lines_elem.textContent = res[0].nombre_resultats_trouves;
     })
     .catch((error) => {
-        console.log(domain)
+        console.log(error)
         console.log("error nbr results");
     })
 })()
